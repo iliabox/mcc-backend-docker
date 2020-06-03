@@ -1,4 +1,5 @@
 FROM composer:latest AS composer
+FROM mlocati/php-extension-installer:latest as php-extension-installer
 FROM php:7.4.5-fpm-alpine
 
 ENV WD /var/www/app
@@ -7,20 +8,23 @@ ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY --from=php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 
 RUN apk --no-cache add \
-        nginx supervisor curl su-exec \
-    && apk --no-cache add \
-        pcre-dev icu-dev ${PHPIZE_DEPS} \
+        nginx \
+        supervisor \
+        curl \
+        su-exec \
     && mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini \
-    && pecl install \
+    && install-php-extensions \
         apcu \
-    && docker-php-ext-enable \
-        apcu \
-    && docker-php-ext-install \
-        pdo_mysql opcache pcntl intl \
-    && docker-php-source delete \
-    && apk del pcre-dev ${PHPIZE_DEPS} \
+        pdo_mysql \
+        opcache \
+        pcntl \
+        intl \
+        gd \
+        zip \
+        bcmath \
     && rm -rf /tmp/* /var/cache/apk/* \
     && mkdir -p $WD \
     && chown -R nginx:nginx $WD \
