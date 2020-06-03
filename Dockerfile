@@ -1,5 +1,5 @@
 FROM composer:latest AS composer
-FROM php:7.4-fpm-alpine
+FROM php:7.4.5-fpm-alpine
 
 ENV WD /var/www/app
 ENV COMPOSER_MEMORY_LIMIT -1
