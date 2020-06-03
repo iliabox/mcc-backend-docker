@@ -7,3 +7,6 @@
 * supervisord
 * curl
 
+## Installation:
+_docker pull crudml/mcc-backend:latest_
+
