@@ -1,11 +1,11 @@
 FROM composer:latest AS composer
-FROM mlocati/php-extension-installer:latest as php-extension-installer
-FROM php:7.4.14-fpm-alpine
+FROM mlocati/php-extension-installer:latest AS php-extension-installer
+FROM php:8.5.8-fpm-alpine
 
-ENV WD /var/www/app
-ENV COMPOSER_MEMORY_LIMIT -1
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
+ENV WD=/var/www/app
+ENV COMPOSER_MEMORY_LIMIT=-1
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --from=php-extension-installer /usr/bin/install-php-extensions /usr/bin/
