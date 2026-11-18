@@ -12,10 +12,10 @@ _docker pull crudml/mcc-backend:latest_
 
 ## Auto build and push (GitHub Actions)
 
-On every push to `master` (or manual run via **Actions → docker → Run workflow**) the workflow `.github/workflows/docker.yml` builds the image for `linux/amd64` and `linux/arm64` and pushes:
+The workflow `.github/workflows/docker.yml` builds the image for `linux/amd64` and `linux/arm64` and pushes to Docker Hub:
 
-* `crudml/mcc-backend:latest`
-* `crudml/mcc-backend:8.5.12`
+* on every push to `master` (or manual run via **Actions → docker → Run workflow**): `crudml/mcc-backend:latest`
+* on every published release (**Releases → Draft a new release**, tag like `v8.5.13`): `crudml/mcc-backend:latest` and `crudml/mcc-backend:8.5.13` — the version tag is taken from the release tag (leading `v` is stripped)
 
 Required repository secrets (**Settings → Secrets and variables → Actions → New repository secret**):
 
