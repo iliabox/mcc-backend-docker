@@ -14,7 +14,7 @@ _docker pull crudml/mcc-backend:latest_
 
 The workflow `.github/workflows/docker.yml` builds the image for `linux/amd64` and `linux/arm64` and pushes to Docker Hub:
 
-* on every published release (**Releases → Draft a new release**, tag like `v8.5.13`): `crudml/mcc-backend:latest` and `crudml/mcc-backend:8.5.13` — the version tag is taken from the release tag (leading `v` is stripped)
+* on every published release (**Releases → Draft a new release**, tag like `8.5.13`, `v8.5.13` or `8.5`): `crudml/mcc-backend:latest` plus a version tag taken from the release tag — `8.5.13` / `v8.5.13` also push `8.5`, and `8.5` pushes `8.5` (leading `v` is stripped)
 * manual run via **Actions → docker → Run workflow** pushes only `crudml/mcc-backend:latest`
 
 Pushes to `master` do not trigger a build.
