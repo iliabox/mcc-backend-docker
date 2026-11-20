@@ -1,6 +1,6 @@
 FROM composer:latest AS composer
 FROM mlocati/php-extension-installer:latest AS php-extension-installer
-FROM php:8.5.12-fpm-alpine
+FROM php:8.5.13-fpm-alpine
 
 ENV WD=/var/www/app
 ENV COMPOSER_MEMORY_LIMIT=-1
